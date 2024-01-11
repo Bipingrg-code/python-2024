@@ -34,7 +34,8 @@ If you're new to Python or programming in general, here are a few steps to get s
   - Lists, dictionaries, tuples
 - [x] File handling
 - [x] Exception handling
-- [ ] Object-oriented programming (currently learning)
+- [X] Object-oriented programming (currently learning)
+- [X] HOF, Sort , Reduce , Filter, Lambda
 - [ ] Web development with Flask/Django (future plan)
 
 Feel free to check the code in the repository to see examples related to these topics.
