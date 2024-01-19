@@ -8,5 +8,6 @@ urlpatterns = [
     # path("route1/", views.route1, name="route1"),
     path("<int:id>", views.index, name="index"),
     path("", views.home, name="home"),
-    # path("list/", views.list, name="list")
+    # path("list/", views.list, name="list"),
+    path("create/", views.create, name="create"),
 ]
