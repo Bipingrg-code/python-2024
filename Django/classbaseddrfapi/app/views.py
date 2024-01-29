@@ -4,7 +4,7 @@ import io
 from .serializers import StudentSerializer
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
-from django.http import JsonResponse, HttpResponseBadRequest
+from django.http import JsonResponse, HttpResponseBadRequest,HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.views import View
@@ -35,13 +35,18 @@ class StudentAPI(View):
         data = JSONParser().parse(stream)
         serializer = StudentSerializer(data=data)
         if serializer.is_valid():
+            exist_email = Student.objects.filter(email = data['email']).exists()
+            if exist_email:
+                error_msg = {'email': ['This email address is already in use.']}
+                json_err = JSONRenderer().render({'error': error_msg})
+                return HttpResponse(json_data, content_type="application/json")
             serializer.save()
             res = {'msg': 'data created.!'}
-            json_data = JSONRenderer().render(res, "application/json").decode('utf-8')
-            return JsonResponse(json_data, safe=False)
+            json_data = JSONRenderer().render(res)
+            return HttpResponse(json_data, content_type="application/json")
         else:
-            json_err = JSONRenderer().render(serializer.error).decode('utf-8')
-            return HttpResponseBadRequest(json_err, safe=False)
+            json_err = JSONRenderer().render(serializer.errors)
+            return HttpResponse(json_err, content_type="application/json")
 
     def put(self, request, *args, **kwargs):
         json_data = request.body
@@ -57,7 +62,7 @@ class StudentAPI(View):
             json_res = JSONRenderer().render(res)
             return JsonResponse(json_res, safe=False)
         else:
-            json_err = JSONRenderer().render(serializer.error).decode('utf-8')
+            json_err = JSONRenderer().render(serializer.errors).decode('utf-8')
             return HttpResponseBadRequest(json_err, safe=False)
 
     def delete(self, request, *args, **kwargs):

@@ -16,13 +16,13 @@ def get_data(id=None):
     data = r.json()
     print(data)
 
-get_data()
+# get_data()
 # post data function
 
 def post_data():
     data = {
-        'name': 'Bipin',
-        'roll': 11,
+        'name': 'bipin',
+        'roll': 100,
         'address': 'Pokhara',
         'email': 'bipin@tested.com'
     }
@@ -32,7 +32,7 @@ def post_data():
     print(res)
 
 
-# post_data()
+post_data()
 # update data function
 def update_data():
     data = {
