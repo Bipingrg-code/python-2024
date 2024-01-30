@@ -23,5 +23,6 @@ router = DefaultRouter()
 router.register('studentapi',views.StudentApiViewSet,basename='student')
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include(router.urls))
+    path('',include(router.urls)),
+    path('auth/',include('rest_framework.urls',namespace='rest_framework'))
 ]
