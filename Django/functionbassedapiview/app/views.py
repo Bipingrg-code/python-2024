@@ -1,9 +1,11 @@
 from django.shortcuts import render
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from rest_framework.response import Response
 from .models import Student
 from .serailizers import StudentSerializers
 from rest_framework import status
+from rest_framework.authentication import BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 # Create your views here.
 # @api_view(['GET','POST'])
 # def studentapi(request):
@@ -13,6 +15,8 @@ from rest_framework import status
 #         print(request.data)
 #         return Response({'msg':'Hello Rest Framework POST'})
 @api_view(['GET','POST','PUT','PATCH','DELETE'])
+@authentication_classes([BasicAuthentication])
+@permission_classes([IsAuthenticated])
 def studentAPI(request, pk=None):
     if request.method == 'GET':
         # print(request.data)
