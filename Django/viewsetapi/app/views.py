@@ -51,4 +51,12 @@ class StudentViewSet(viewsets.ViewSet):
         return Response({'msg':'deleted.!'},status=status.HTTP_200_OK)
         
 
-# Create your views here.
+# # Create your views here.
+# model viewsets
+# class StudentViewSet(viewsets.ModelViewSet):
+#     queryset = Student.objects.all()
+#     serializer = StudentSerializer
+# read only model viewsets
+# class StudentViewReadOnlyModelViewSet(viewsets.ReadOnlyModelViewSet):
+#     queryset = Student.objects.all()
+#     serializer = StudentsSerializer
